@@ -17,7 +17,7 @@
 package com.google.zxing.client.android.result;
 
 import com.google.zxing.client.android.LocaleManager;
-import linq2fa.is.com.sa.linq2fa.R;
+import sa.com.is.activity.R;
 import com.google.zxing.client.result.ParsedResult;
 import com.google.zxing.client.result.URIParsedResult;
 

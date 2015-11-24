@@ -34,7 +34,7 @@ import android.util.Log;
 import java.io.ByteArrayOutputStream;
 import java.util.Map;
 
-import linq2fa.is.com.sa.linq2fa.R;
+import sa.com.is.activity.R;
 
 final class DecodeHandler extends Handler {
 

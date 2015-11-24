@@ -38,7 +38,7 @@ import android.util.Log;
 import java.util.Collection;
 import java.util.Map;
 
-import linq2fa.is.com.sa.linq2fa.R;
+import sa.com.is.activity.R;
 
 /**
  * This class handles all the messaging which comprises the state machine for capture.

@@ -1,11 +1,14 @@
 package sa.com.is.activity;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import linq2fa.is.com.sa.linq2fa.R;
+import com.google.zxing.client.android.PreferencesActivity;
+
+import sa.com.is.activity.R;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -31,6 +34,10 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+            intent.setClassName(this, PreferencesActivity.class.getName());
+            startActivity(intent);
             return true;
         }
 

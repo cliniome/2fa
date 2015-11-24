@@ -30,7 +30,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 
-import linq2fa.is.com.sa.linq2fa.R;
+import sa.com.is.activity.R;
 
 public final class PreferencesFragment 
     extends PreferenceFragment 

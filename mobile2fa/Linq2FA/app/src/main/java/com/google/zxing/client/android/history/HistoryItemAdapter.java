@@ -25,7 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.google.zxing.Result;
-import linq2fa.is.com.sa.linq2fa.R;
+import sa.com.is.activity.R;
 
 import java.util.ArrayList;
 

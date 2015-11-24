@@ -29,7 +29,7 @@ import android.util.Log;
 import java.io.Closeable;
 import java.io.IOException;
 
-import linq2fa.is.com.sa.linq2fa.R;
+import sa.com.is.activity.R;
 
 /**
  * Manages beeps and vibrations for {@link CaptureActivity}.

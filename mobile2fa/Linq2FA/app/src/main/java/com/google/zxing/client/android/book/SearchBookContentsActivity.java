@@ -42,7 +42,7 @@ import java.util.regex.Pattern;
 import com.google.zxing.client.android.Intents;
 import com.google.zxing.client.android.HttpHelper;
 import com.google.zxing.client.android.LocaleManager;
-import linq2fa.is.com.sa.linq2fa.R;
+import sa.com.is.activity.R;
 
 /**
  * Uses Google Book Search to find a word or phrase in the requested book.

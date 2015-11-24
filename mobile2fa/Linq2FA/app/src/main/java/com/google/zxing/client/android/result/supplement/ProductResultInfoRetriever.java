@@ -20,7 +20,7 @@ import android.content.Context;
 import android.text.Html;
 import android.widget.TextView;
 import com.google.zxing.client.android.HttpHelper;
-import linq2fa.is.com.sa.linq2fa.R;
+import sa.com.is.activity.R;
 import com.google.zxing.client.android.history.HistoryManager;
 import com.google.zxing.client.android.LocaleManager;
 

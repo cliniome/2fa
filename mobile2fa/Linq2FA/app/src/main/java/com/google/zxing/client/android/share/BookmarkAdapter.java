@@ -16,7 +16,7 @@
 
 package com.google.zxing.client.android.share;
 
-import linq2fa.is.com.sa.linq2fa.R;
+import sa.com.is.activity.R;
 
 import android.content.Context;
 import android.database.Cursor;

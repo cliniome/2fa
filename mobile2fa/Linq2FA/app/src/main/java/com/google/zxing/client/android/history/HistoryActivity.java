@@ -36,7 +36,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.google.zxing.client.android.CaptureActivity;
 import com.google.zxing.client.android.Intents;
-import linq2fa.is.com.sa.linq2fa.R;
+import sa.com.is.activity.R;
 
 public final class HistoryActivity extends ListActivity {
 

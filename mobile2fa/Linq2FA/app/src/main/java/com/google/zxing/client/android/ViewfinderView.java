@@ -32,7 +32,7 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-import linq2fa.is.com.sa.linq2fa.R;
+import sa.com.is.activity.R;
 
 /**
  * This view is overlaid on top of the camera preview. It adds the viewfinder rectangle and partial

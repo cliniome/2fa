@@ -71,7 +71,7 @@ import java.util.Date;
 import java.util.EnumSet;
 import java.util.Map;
 
-import linq2fa.is.com.sa.linq2fa.R;
+import sa.com.is.activity.R;
 
 /**
  * This activity opens the camera and does the actual scanning on a background thread. It draws a

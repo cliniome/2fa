@@ -1,10 +1,11 @@
-package linq2fa.is.com.sa.linq2fa;
+package sa.com.is.activity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import linq2fa.is.com.sa.linq2fa.R;
 
 public class MainActivity extends ActionBarActivity {
 

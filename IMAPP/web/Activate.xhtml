@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <ui:composition template="templates/masterLayout.xhtml">
+
+        <ui:define name="contentSection">
+
+            <div class="col-sm-8">
+
+                <hr/>
+
+                <p:wizard backLabel="Previous" nextLabel="Next" flowListener="#{accountActivator.onFlowProcessor}">
+                    <p:tab id="newaccounttab" title="Account Information">
+                        <p:panel id="newaccountpanel" header="New Account Activation">
+                            <p:messages/>
+                            <p:panelGrid columns="2">
+                                <h:outputLabel value="First Name"/>
+                                <p:inputText value="#{accountActivator.firstName}" required="true" requiredMessage="First Name is required"
+                                             style="width: 300px;" placeholder="Enter Your First Name">
+
+                                </p:inputText>
+                                <h:outputLabel value="Last Name"/>
+                                <p:inputText value="#{accountActivator.lastName}" required="true" requiredMessage="Last Name is required"
+                                             style="width: 300px;" placeholder="Enter Your Last Name"/>
+                                <h:outputLabel value="Email Address"/>
+                                <p:inputText value="#{accountActivator.emailAddress}" required="true" requiredMessage="Email Address is required"
+                                             style="width: 300px;" placeholder="Enter Your Email Address"/>
+                                <h:outputLabel value="UserName"/>
+                                <p:inputText value="#{accountActivator.userName}"
+                                             required="true" requiredMessage="User Name is required"
+                                             style="width: 300px;" placeholder="Enter Your User Name"/>
+                            </p:panelGrid>
+                        </p:panel>
+                    </p:tab>
+                    <p:tab id="barcode" title="Registration Details">
+                        <p:panel id="barcodepanel" header="Registration Details">
+                            <p:messages/>
+                            <h3>Please , Scan the following QR Code by your mobile application
+                             to activate your Account.</h3>
+                            <br/>
+                            <p:barcode  value="#{accountActivator.qrPayload}" type="qr"/>
+                        </p:panel>
+                    </p:tab>
+                </p:wizard>
+
+            </div>
+
+        </ui:define>
+
+    </ui:composition>
+</f:view>
+</html>

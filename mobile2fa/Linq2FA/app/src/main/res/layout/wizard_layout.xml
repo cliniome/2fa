@@ -1,39 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_marginBottom="3dp"
+    android:layout_height="fill_parent">
 
    <FrameLayout
        android:id="@+id/wizard_pane"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:layout_weight="3"
+       android:layout_weight="1"
        ></FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0"
         android:orientation="horizontal"
-        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+
         >
         <Button
             android:id="@+id/previous_btn"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             android:tag="PREVIOUS"
             android:text="@string/previousbtn_account_activation"
-            />
+            android:layout_weight="0.5"
+             />
 
 
         <Button
             android:id="@+id/next_btn"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:tag="NEXT"
-            android:text="@string/nextbtn_account_activation"
-            />
+            android:layout_weight="0.5"
+            android:text="@string/nextbtn_account_activation" />
 
 
 

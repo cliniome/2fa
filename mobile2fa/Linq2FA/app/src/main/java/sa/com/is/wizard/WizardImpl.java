@@ -162,11 +162,12 @@ public class WizardImpl implements Wizard , OnClickListener {
 
         preProcess(step);
 
+        //ribaviser
+
         WizardStep currentStep = steps.get(step);
         currentStep.setParent(parentFragment);
         FragmentManager manager = parentFragment.getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-
         transaction.replace(R.id.wizard_pane, (Fragment) currentStep);
         transaction.addToBackStack(null);
         transaction.commit();

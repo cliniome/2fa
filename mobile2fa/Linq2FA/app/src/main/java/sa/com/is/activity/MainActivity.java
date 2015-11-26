@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -60,7 +61,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         //Pass here the intent with the data
-        /*//Something like
+        //Something like
         if(wizardFragment != null)
         {
             try
@@ -71,7 +72,16 @@ public class MainActivity extends ActionBarActivity {
             {
                 s.printStackTrace();
             }
-        }*/
+        }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if(keyCode ==KeyEvent.KEYCODE_BACK)
+            return true;
+
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override

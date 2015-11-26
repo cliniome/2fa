@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import sa.com.is.activity.R;
@@ -81,6 +82,13 @@ public class AccountPasswordStep extends Fragment implements WizardStep {
         }catch (Exception s)
         {
             throw s;
+        }
+
+        finally
+        {
+            Context context = ((WizardFragment)parentFragment).getContext();
+            InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(pinPasswordText.getWindowToken(), 0);
         }
 
 

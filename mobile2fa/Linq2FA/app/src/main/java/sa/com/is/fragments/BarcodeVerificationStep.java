@@ -7,6 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.widget.Button;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 import sa.com.is.activity.R;
 import sa.com.is.wizard.WizardStep;
@@ -15,6 +20,10 @@ import sa.com.is.wizard.WizardStep;
  * Created by snouto on 26/11/15.
  */
 public class BarcodeVerificationStep extends Fragment implements WizardStep {
+
+
+
+    public static final int BARCODE_REQUEST_CODE = 0;
 
 
 
@@ -35,12 +44,45 @@ public class BarcodeVerificationStep extends Fragment implements WizardStep {
 
         try
         {
+            //Access the Web View First
+            WebView webView = (WebView)rootView.findViewById(R.id.barcodewebView);
+            webView.getSettings().setJavaScriptEnabled(true);
+            webView.loadData(getloadText(),"text/html","UTF-8");
+
+            //Access the Button and Bind it
+            Button openBarcodeBtn = (Button)rootView.findViewById(R.id.barcodebtn);
+
+            openBarcodeBtn.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            //open the capture activity in here
+                            Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+                            intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+                            startActivityForResult(intent, BARCODE_REQUEST_CODE);
+
+                        }
+                    }
+            );
+
 
         }catch (Exception s)
         {
             s.printStackTrace();
         }
     }
+
+    private String getloadText() throws IOException {
+
+        InputStream is = this.getActivity().getAssets().open("barcode.html");
+        byte[] data = new byte[is.available()];
+        is.read(data);
+        is.close();
+
+        return new String(data,"UTF-8");
+    }
+
 
     @Override
     public void setParent(Fragment parentFragment) {

@@ -33,4 +33,11 @@
 
     </style>
 
+    <style name="RoundButton">
+        <item name="android:background">@android:color/holo_blue_light</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
 </resources>

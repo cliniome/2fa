@@ -60,6 +60,7 @@ public class WelcomeStep extends Fragment implements WizardStep {
         byte[] data = new byte[is.available()];
 
         is.read(data);
+        is.close();
 
         return new String(data,"UTF-8");
     }

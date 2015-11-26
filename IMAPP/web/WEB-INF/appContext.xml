@@ -34,7 +34,7 @@ http://www.springframework.org/schema/jee
               <property name="encryptionModeType" value="RSA/ECB/OAEPWithSHA1AndMGF1Padding"/>
               <property name="initialSeed" value="seed123456789seed"/>
               <property name="numberOfSeconds" value="60"/>
-              <property name="privateKeyLocation" value="/home/snouto/is/Projects/IMAPP/src/main/java/sa/com/is/imapp/utils/private.der"/>
+              <property name="privateKeyLocation" value="/home/snouto/is/Projects/IMAPP/src/main/java/sa/com/is/imapp/utils/signingprivatekey.der"/>
               <property name="publicKeyLocation" value="/home/snouto/is/Projects/IMAPP/src/main/java/sa/com/is/imapp/utils/public.der"/>
               <property name="symmetricKeyAlgorithm" value="DESede"/>
        </bean>

@@ -71,9 +71,10 @@ public class WizardImpl implements Wizard , OnClickListener {
         {
             previousBtn.setEnabled(true);
             nextBtn.setEnabled(false);
-        }else
+        }else if (step > 0 && step < steps.size() - 1)
         {
             previousBtn.setEnabled(true);
+            nextBtn.setEnabled(true);
         }
 
         if(step == 0 && step == steps.size() - 1)

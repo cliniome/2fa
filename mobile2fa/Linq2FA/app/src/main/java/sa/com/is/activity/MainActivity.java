@@ -1,6 +1,8 @@
 package sa.com.is.activity;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,14 +10,68 @@ import android.view.MenuItem;
 
 import com.google.zxing.client.android.PreferencesActivity;
 
-import sa.com.is.activity.R;
+import sa.com.is.fragments.WizardFragment;
 
 public class MainActivity extends ActionBarActivity {
+
+
+    private WizardFragment wizardFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initView();
+    }
+
+    private void initView() {
+
+        try
+        {
+            //Set the main Fragment
+            loadMainFragment();
+
+
+        }catch (Exception s)
+        {
+            s.printStackTrace();
+        }
+    }
+
+    private void loadMainFragment() {
+        try
+        {
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            WizardFragment wizardFragment = new WizardFragment();
+            wizardFragment.setContext(this);
+            this.wizardFragment = wizardFragment;
+            transaction.replace(R.id.content_frame,wizardFragment);
+            transaction.commit();
+
+        }catch (Exception s)
+        {
+            s.printStackTrace();
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        //Pass here the intent with the data
+        /*//Something like
+        if(wizardFragment != null)
+        {
+            try
+            {
+                wizardFragment.getWizard().registerIntent(data);
+
+            }catch (Exception s)
+            {
+                s.printStackTrace();
+            }
+        }*/
     }
 
     @Override
@@ -43,4 +99,6 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

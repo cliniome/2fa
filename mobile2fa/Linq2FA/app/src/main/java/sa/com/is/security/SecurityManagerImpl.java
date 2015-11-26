@@ -1,5 +1,9 @@
 package sa.com.is.security;
 
+import android.content.Context;
+
+import org.spongycastle.jce.provider.BouncyCastleProvider;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -31,7 +35,9 @@ public class SecurityManagerImpl implements SecurityManager {
 
         try
         {
-            InputStream publicKeyStream = new FileInputStream(new File(configuration.getPublicKeyLocation()));
+
+            InputStream publicKeyStream = configuration.getContext().getAssets().open(
+                    configuration.getPublicKeyName());
 
             if(publicKeyStream != null)
             {
@@ -64,7 +70,9 @@ public class SecurityManagerImpl implements SecurityManager {
     private byte[] readPrivateKeyBytes() throws IOException {
 
 
-        InputStream privateInputStream = new FileInputStream(new File(configuration.getPrivateKeyLocation()));
+
+        InputStream privateInputStream = configuration.getContext().getAssets()
+                .open(configuration.getPrivateKeyName());
         byte[] privateKey = new byte[privateInputStream.available()];
         privateInputStream.read(privateKey);
         privateInputStream.close();
@@ -73,15 +81,34 @@ public class SecurityManagerImpl implements SecurityManager {
 
     }
 
+    @Override
+    public boolean verifySignature(byte[] signatureData) throws Exception {
 
-    public byte[] encryptEnvelope(byte[] envelope) {
         try
         {
-            Cipher cipher = Cipher.getInstance(configuration.getSymmetricKeyAlgorithm());
-            byte[] secretKey = this.generateKey();
-            cipher.init(Cipher.ENCRYPT_MODE,new SecretKeySpec(secretKey,configuration.getSymmetricKeyAlgorithm()));
-            return cipher.doFinal(envelope);
+            Signature signature = Signature.getInstance("SHA1withRSA","BC");
+            signature.initVerify(readPublicKey());
+            return signature.verify(signatureData);
 
+
+        }catch (Exception s)
+        {
+            s.printStackTrace();
+            return false;
+        }
+
+
+    }
+
+    @Override
+    public byte[] decryptSymmetricKey(byte[] key) throws Exception {
+        try
+        {
+
+            Cipher cipher = Cipher.getInstance(configuration.getSymmetricAlgorithm());
+            cipher.init(Cipher.DECRYPT_MODE, readPrivateKey());
+            cipher.update(key);
+            return cipher.doFinal();
 
         }catch (Exception s)
         {
@@ -90,31 +117,25 @@ public class SecurityManagerImpl implements SecurityManager {
         }
     }
 
-    public byte[] generateSignature(byte[] data) throws Exception {
-        Signature rsa = Signature.getInstance("SHA1withRSA");
-        if(rsa == null) throw new Exception("No Security Provider is available for RSA Algorithm");
-        rsa.initSign(readPrivateKey());
-        rsa.update(data);
-        return rsa.sign();
+    @Override
+    public byte[] decryptEnvelope(byte[] data , byte[] key) throws Exception {
+        try
+        {
+            Cipher cipher = Cipher.getInstance(configuration.getSymmetricAlgorithm());
+            cipher.init(Cipher.DECRYPT_MODE,new SecretKeySpec(key,configuration.getSymmetricAlgorithm()));
+            cipher.update(data);
+            return cipher.doFinal();
 
+        }catch (Exception s)
+        {
+            s.printStackTrace();
+            return null;
+        }
     }
 
-    public byte[] generateKey() throws Exception {
+    static {
 
-        KeyGenerator generator = KeyGenerator.getInstance(configuration.getSymmetricKeyAlgorithm());
-
-        SecretKey secretKey = generator.generateKey();
-        byte[] encodedBytes = secretKey.getEncoded();
-        //decrypt the key
-        return encodedBytes;
-    }
-
-    public byte[] encryptSymmetricKey(byte[] key) throws Exception {
-
-        Cipher cipher = Cipher.getInstance(configuration.getEncryptionModeType());
-        PublicKey pubkey = this.readPublicKey();
-        cipher.init(Cipher.ENCRYPT_MODE,pubkey);
-        return cipher.doFinal(key);
+        Security.insertProviderAt(new BouncyCastleProvider(),1);
     }
 }
 

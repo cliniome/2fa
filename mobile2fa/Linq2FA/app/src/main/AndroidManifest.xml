@@ -63,13 +63,7 @@
             android:screenOrientation="sensorLandscape"
             android:stateNotNeeded="true"
             android:theme="@style/CaptureTheme"
-            android:windowSoftInputMode="stateAlwaysHidden" >
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:windowSoftInputMode="stateAlwaysHidden">
 
             <intent-filter>
                 <action android:name="com.google.zxing.client.android.SCAN" />
@@ -133,7 +127,14 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:icon="@drawable/logo"
+            android:label="@string/app_name">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
     </application>

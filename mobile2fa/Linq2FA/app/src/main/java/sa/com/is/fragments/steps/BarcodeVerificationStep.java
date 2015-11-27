@@ -25,6 +25,7 @@ public class BarcodeVerificationStep extends Fragment implements WizardStep {
 
 
     public static final int BARCODE_REQUEST_CODE = 0;
+    public static final String BARCODE_RESULT_EXTRA = "SCAN_RESULT";
 
 
 
@@ -112,6 +113,18 @@ public class BarcodeVerificationStep extends Fragment implements WizardStep {
 
                 //That means the barcode scanner has captured some data
                 //begin processing it in here
+
+                String contents = data.getStringExtra(BARCODE_RESULT_EXTRA);
+
+                if(contents != null && contents.length() > 0 )
+                {
+                    //give it to the system Manager to process it on another thread other than the Main UI Thread
+                }else
+                {
+                    //Notify the user that the scanning process was bad and nothing has returned from the Capture Activity
+                }
+
+
             }else if(resultCode == Activity.RESULT_CANCELED){
 
                 //That means the user has cancelled the scanning operation

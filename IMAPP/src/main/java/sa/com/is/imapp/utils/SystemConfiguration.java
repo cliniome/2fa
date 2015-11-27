@@ -11,6 +11,7 @@ public class SystemConfiguration {
     private String initialSeed;
     private String encryptionModeType;
     private String SymmetricKeyAlgorithm;
+    private int numDigits;
 
     public String getPrivateKeyLocation() {
         return privateKeyLocation;
@@ -58,5 +59,13 @@ public class SystemConfiguration {
 
     public void setSymmetricKeyAlgorithm(String symmetricKeyAlgorithm) {
         SymmetricKeyAlgorithm = symmetricKeyAlgorithm;
+    }
+
+    public int getNumDigits() {
+        return numDigits;
+    }
+
+    public void setNumDigits(int numDigits) {
+        this.numDigits = numDigits;
     }
 }

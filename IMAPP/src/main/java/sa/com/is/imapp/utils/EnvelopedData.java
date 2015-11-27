@@ -11,14 +11,16 @@ public class EnvelopedData implements Serializable {
     private String signature;
     private int seconds;
     private String key;
+    private int numDigits;
 
     public EnvelopedData(){}
-    public EnvelopedData(String seed , String signature , int seconds,String key)
+    public EnvelopedData(String seed , String signature , int seconds,String key,int numDigits)
     {
         this.setSeed(seed);
         this.setSignature(signature);
         this.setSeconds(seconds);
         this.setKey(key);
+        this.setNumDigits(numDigits);
     }
 
     public String getSeed() {
@@ -51,5 +53,13 @@ public class EnvelopedData implements Serializable {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public int getNumDigits() {
+        return numDigits;
+    }
+
+    public void setNumDigits(int numDigits) {
+        this.numDigits = numDigits;
     }
 }

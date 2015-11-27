@@ -89,7 +89,8 @@ public class WelcomeStep extends Fragment implements WizardStep {
     }
 
     @Override
-    public void processIntent(Intent data) throws Exception {
+    public void processIntent(int requestCode, int resultCode, Intent data) throws Exception {
 
     }
+
 }

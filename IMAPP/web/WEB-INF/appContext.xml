@@ -37,6 +37,8 @@ http://www.springframework.org/schema/jee
               <property name="privateKeyLocation" value="/home/snouto/is/Projects/IMAPP/src/main/java/sa/com/is/imapp/utils/signingprivatekey.der"/>
               <property name="publicKeyLocation" value="/home/snouto/is/Projects/IMAPP/src/main/java/sa/com/is/imapp/utils/public.der"/>
               <property name="symmetricKeyAlgorithm" value="DESede"/>
+              <property name="numDigits" value="8"/>
+
        </bean>
 
 </beans>

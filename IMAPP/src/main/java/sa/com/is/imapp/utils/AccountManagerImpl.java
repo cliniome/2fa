@@ -40,7 +40,7 @@ public class AccountManagerImpl implements AccountManager {
           3. Encrypt the bytes array
          */
         String seed = getSeed(account);
-        byte[] payload = generatePayload(seed, configuration.getNumberOfSeconds());
+        byte[] payload = generatePayload(seed, configuration.getNumberOfSeconds(),configuration.getNumDigits());
         //Sign the seed value
         byte[] signature = securityManager.generateSignature(payload);
         //Base64 Encode the signature
@@ -53,6 +53,7 @@ public class AccountManagerImpl implements AccountManager {
         envelopedData.setSeconds(configuration.getNumberOfSeconds());
         envelopedData.setSeed(Base64.encodeToString(securityManager.encryptEnvelope(seed.getBytes(CHARSET_ENCODING)),false));
         envelopedData.setSignature(Base64.encodeToString(signature,false));
+        envelopedData.setNumDigits(configuration.getNumDigits());
         //Convert that into Json
         Gson gson = new GsonBuilder().create();
         //The Json String representation of the enveloped Data
@@ -75,7 +76,7 @@ public class AccountManagerImpl implements AccountManager {
 
     }
 
-    private byte[] generatePayload(String seed, int numberOfSeconds) throws Exception {
+    private byte[] generatePayload(String seed, int numberOfSeconds , int numDigits) throws Exception {
         //get the bytes for the seed
         byte[] seedBytes = seed.getBytes(CHARSET_ENCODING);
         byte[] newBytes = new byte[seedBytes.length];
@@ -85,7 +86,7 @@ public class AccountManagerImpl implements AccountManager {
 
             for(int i=0;i<seedBytes.length;i++){
 
-                newBytes[i] = new Integer(seedBytes[i] ^ numberOfSeconds).byteValue();
+                newBytes[i] = new Integer((seedBytes[i] ^ numberOfSeconds) ^ numDigits).byteValue();
             }
         }else throw new Exception("There was a problem generating the payload for the seed , the seed is empty");
 

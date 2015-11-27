@@ -64,9 +64,10 @@ public class MainActivity extends ActionBarActivity {
         //Something like
         if(wizardFragment != null)
         {
+
             try
             {
-                wizardFragment.getWizard().registerIntent(data);
+                wizardFragment.getWizard().registerIntent(requestCode,resultCode,data);
 
             }catch (Exception s)
             {

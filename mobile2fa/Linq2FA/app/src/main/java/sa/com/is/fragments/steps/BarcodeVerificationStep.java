@@ -1,5 +1,6 @@
 package sa.com.is.fragments.steps;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -56,7 +57,6 @@ public class BarcodeVerificationStep extends Fragment implements WizardStep {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
                             //open the capture activity in here
                             Intent intent = new Intent("com.google.zxing.client.android.SCAN");
                             intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
@@ -104,7 +104,20 @@ public class BarcodeVerificationStep extends Fragment implements WizardStep {
     }
 
     @Override
-    public void processIntent(Intent data) throws Exception {
+    public void processIntent(int requestCode, int resultCode, Intent data) throws Exception {
+
+        if(requestCode == BARCODE_REQUEST_CODE)
+        {
+            if(resultCode == Activity.RESULT_OK){
+
+                //That means the barcode scanner has captured some data
+                //begin processing it in here
+            }else if(resultCode == Activity.RESULT_CANCELED){
+
+                //That means the user has cancelled the scanning operation
+
+            }
+        }
 
     }
 }

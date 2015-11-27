@@ -10,6 +10,6 @@ public interface WizardStep {
 
     public void setParent(Fragment parentFragment);
     public boolean onFinish() throws Exception;
-    public void processIntent(Intent data) throws Exception;
+    public void processIntent(int requestCode, int resultCode, Intent data) throws Exception;
 
 }

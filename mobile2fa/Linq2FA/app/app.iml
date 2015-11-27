@@ -90,8 +90,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="mail" level="project" />
     <orderEntry type="library" exported="" name="pg-1.52.0.0" level="project" />
-    <orderEntry type="library" exported="" name="core-1.52.0.0" level="project" />
     <orderEntry type="library" exported="" name="additionnal" level="project" />
+    <orderEntry type="library" exported="" name="core-1.52.0.0" level="project" />
     <orderEntry type="library" exported="" name="pkix-1.52.0.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.1.1" level="project" />
     <orderEntry type="library" exported="" name="spongyCastleHandlers" level="project" />
@@ -103,6 +103,7 @@
     <orderEntry type="library" exported="" name="support-v4-22.1.1" level="project" />
     <orderEntry type="library" exported="" name="activation" level="project" />
     <orderEntry type="library" exported="" name="android-core-3.1.0" level="project" />
+    <orderEntry type="library" exported="" name="gson-2.5" level="project" />
     <orderEntry type="library" exported="" name="android-sun-jarsign-support-1.1" level="project" />
   </component>
 </module>

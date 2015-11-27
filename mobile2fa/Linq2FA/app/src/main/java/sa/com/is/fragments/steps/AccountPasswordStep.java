@@ -96,9 +96,10 @@ public class AccountPasswordStep extends Fragment implements WizardStep {
     }
 
     @Override
-    public void processIntent(Intent data) throws Exception {
+    public void processIntent(int requestCode, int resultCode, Intent data) throws Exception {
 
     }
+
 
     private boolean checkStrength() {
         try

@@ -93,13 +93,13 @@ public class WizardImpl implements Wizard , OnClickListener {
     }
 
     @Override
-    public void registerIntent(Intent data) throws Exception {
+    public void registerIntent(int requestCode, int resultCode, Intent data) throws Exception {
 
         //pass the intent to the current wizard Step
         WizardStep currentStep = steps.get(current_step);
 
         if(currentStep != null)
-            currentStep.processIntent(data);
+            currentStep.processIntent(requestCode,resultCode,data);
     }
 
 

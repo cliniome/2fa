@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import sa.com.is.activity.R;
+import sa.com.is.fragments.steps.AccountPasswordStep;
+import sa.com.is.fragments.steps.BarcodeVerificationStep;
+import sa.com.is.fragments.steps.WelcomeStep;
 import sa.com.is.models.EnvelopedData;
 import sa.com.is.wizard.Wizard;
 import sa.com.is.wizard.WizardImpl;

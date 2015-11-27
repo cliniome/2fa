@@ -1,4 +1,4 @@
-package sa.com.is.fragments;
+package sa.com.is.fragments.steps;
 
 import android.content.Intent;
 import android.os.Bundle;

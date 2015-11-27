@@ -1,4 +1,4 @@
-package sa.com.is.fragments;
+package sa.com.is.fragments.steps;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import sa.com.is.activity.R;
+import sa.com.is.fragments.WizardFragment;
 import sa.com.is.wizard.WizardStep;
 
 /**

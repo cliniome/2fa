@@ -43,4 +43,28 @@
         <param-name>javax.faces.PARTIAL_STATE_SAVING</param-name>
         <param-value>false</param-value>
     </context-param>
+
+    <servlet>
+        <servlet-name>Jersey Restful</servlet-name>
+        <!-- <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>-->
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>sa.com.is.imapp.rest</param-value>
+        </init-param>
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>sa.com.is.imapp.utils.MyJerseyConfiguration</param-value>
+        </init-param>
+        <init-param>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Jersey Restful</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -13,4 +13,6 @@ public interface Wizard {
     public void addStep(WizardStep step);
 
     public void registerIntent(int requestCode, int resultCode, Intent data) throws Exception;
+
+    public void moveToLast();
 }

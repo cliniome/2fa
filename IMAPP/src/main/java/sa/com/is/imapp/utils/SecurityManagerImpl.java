@@ -75,12 +75,11 @@ public class SecurityManagerImpl implements SecurityManager {
     }
 
 
-    public byte[] encryptEnvelope(byte[] envelope) {
+    public byte[] encryptEnvelope(byte[] envelope,byte[] key) {
         try
         {
             Cipher cipher = Cipher.getInstance(configuration.getSymmetricKeyAlgorithm());
-            byte[] secretKey = this.generateKey();
-            cipher.init(Cipher.ENCRYPT_MODE,new SecretKeySpec(secretKey,configuration.getSymmetricKeyAlgorithm()));
+            cipher.init(Cipher.ENCRYPT_MODE,new SecretKeySpec(key,configuration.getSymmetricKeyAlgorithm()));
             return cipher.doFinal(envelope);
 
 

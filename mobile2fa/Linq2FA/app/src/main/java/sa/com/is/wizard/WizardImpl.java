@@ -70,7 +70,22 @@ public class WizardImpl implements Wizard , OnClickListener {
         }else if(step == steps.size() - 1)
         {
             previousBtn.setEnabled(true);
-            nextBtn.setEnabled(false);
+            //nextBtn.setEnabled(false);
+
+            nextBtn.setText("Finish");
+            nextBtn.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent i = v.getContext().getPackageManager()
+                            .getLaunchIntentForPackage(v.getContext().getPackageName());
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    v.getContext().startActivity(i);
+                }
+            });
+
+
+
         }else if (step > 0 && step < steps.size() - 1)
         {
             previousBtn.setEnabled(true);
@@ -102,6 +117,13 @@ public class WizardImpl implements Wizard , OnClickListener {
             currentStep.processIntent(requestCode,resultCode,data);
     }
 
+    @Override
+    public void moveToLast() {
+
+        current_step = steps.size() - 1;
+
+        moveTo(current_step);
+    }
 
 
     @Override

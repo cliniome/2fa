@@ -13,6 +13,7 @@ public class EnvelopedData implements Serializable {
     private String key;
     private String binPassword;
     private int numDigits;
+    private String accountName;
 
 
 
@@ -71,5 +72,13 @@ public class EnvelopedData implements Serializable {
 
     public void setNumDigits(int numDigits) {
         this.numDigits = numDigits;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
 }

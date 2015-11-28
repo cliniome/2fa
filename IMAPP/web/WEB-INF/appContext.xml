@@ -30,6 +30,10 @@ http://www.springframework.org/schema/jee
        http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
 ">
 
+
+       <context:component-scan base-package="sa.com.is.imapp"/>
+       <context:annotation-config></context:annotation-config>
+
        <bean id="systemConfiguration" class="sa.com.is.imapp.utils.SystemConfiguration">
               <property name="encryptionModeType" value="RSA/ECB/OAEPWithSHA1AndMGF1Padding"/>
               <property name="initialSeed" value="seed123456789seed"/>
@@ -38,7 +42,61 @@ http://www.springframework.org/schema/jee
               <property name="publicKeyLocation" value="/home/snouto/is/Projects/IMAPP/src/main/java/sa/com/is/imapp/utils/public.der"/>
               <property name="symmetricKeyAlgorithm" value="DESede"/>
               <property name="numDigits" value="8"/>
+              <property name="port" value="8080"/>
+              <property name="serverAddress" value="192.168.1.4"/>
+              <property name="restPath" value="rest/account"/>
 
        </bean>
+
+
+
+       <!-- We modified the alfahresPro JNDI and the jndi name in the web.xml -->
+       <bean id="datasource" class="org.springframework.jndi.JndiObjectFactoryBean">
+              <property name="jndiName" value="imappjndi"></property>
+              <property name="lookupOnStartup" value="true"/>
+              <property name="cache" value="true"/>
+              <property name="proxyInterface" value="javax.sql.DataSource"/>
+       </bean>
+
+       <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+              <property name="dataSource" ref="datasource"/>
+              <property name="hibernateProperties">
+                     <props>
+                            <prop key="hibernate.show_sql">true</prop>
+                            <prop key="hibernate.hbm2ddl.auto">validate</prop>
+                            <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                     </props>
+              </property>
+       </bean>
+
+       <bean id="myEmf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+              <property name="dataSource" ref="datasource" />
+              <property name="packagesToScan" value="sa.com.is.imapp.db.models" />
+              <property name="persistenceProvider">
+                     <bean class="org.hibernate.ejb.HibernatePersistence" />
+              </property>
+              <property name="jpaProperties">
+                     <props>
+                            <prop key="hibernate.hbm2ddl.auto">update</prop>
+                            <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                     </props>
+              </property>
+       </bean>
+
+       <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+              <property name="entityManagerFactory" ref="myEmf" />
+       </bean>
+       <tx:annotation-driven />
+
+       <!--<jee:jndi-lookup id="entityManagerFactory" jndi-name="alfahresjndi"/>-->
+
+       <tx:annotation-driven/>
+       <!-- <tx:jta-transaction-manager   />-->
+       <tx:advice id="txAdvice">
+              <tx:attributes>
+                     <tx:method name="get*" read-only="true" propagation="REQUIRED" />
+                     <tx:method name="*" propagation="REQUIRED" />
+              </tx:attributes>
+       </tx:advice>
 
 </beans>

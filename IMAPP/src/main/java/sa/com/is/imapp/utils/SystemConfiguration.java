@@ -12,6 +12,9 @@ public class SystemConfiguration {
     private String encryptionModeType;
     private String SymmetricKeyAlgorithm;
     private int numDigits;
+    private String serverAddress;
+    private int port;
+    private String restPath;
 
     public String getPrivateKeyLocation() {
         return privateKeyLocation;
@@ -67,5 +70,29 @@ public class SystemConfiguration {
 
     public void setNumDigits(int numDigits) {
         this.numDigits = numDigits;
+    }
+
+    public String getServerAddress() {
+        return serverAddress;
+    }
+
+    public void setServerAddress(String serverAddress) {
+        this.serverAddress = serverAddress;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public String getRestPath() {
+        return restPath;
+    }
+
+    public void setRestPath(String restPath) {
+        this.restPath = restPath;
     }
 }

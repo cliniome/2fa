@@ -82,12 +82,13 @@ public class SecurityManagerImpl implements SecurityManager {
     }
 
     @Override
-    public boolean verifySignature(byte[] signatureData) throws Exception {
+    public boolean verifySignature(byte[] signatureData , byte[] dataToVerify) throws Exception {
 
         try
         {
             Signature signature = Signature.getInstance("SHA1withRSA","BC");
             signature.initVerify(readPublicKey());
+            signature.update(dataToVerify);
             return signature.verify(signatureData);
 
 
@@ -105,7 +106,7 @@ public class SecurityManagerImpl implements SecurityManager {
         try
         {
 
-            Cipher cipher = Cipher.getInstance(configuration.getSymmetricAlgorithm());
+            Cipher cipher = Cipher.getInstance(configuration.getEncdecryptMode());
             cipher.init(Cipher.DECRYPT_MODE, readPrivateKey());
             cipher.update(key);
             return cipher.doFinal();
@@ -123,8 +124,7 @@ public class SecurityManagerImpl implements SecurityManager {
         {
             Cipher cipher = Cipher.getInstance(configuration.getSymmetricAlgorithm());
             cipher.init(Cipher.DECRYPT_MODE,new SecretKeySpec(key,configuration.getSymmetricAlgorithm()));
-            cipher.update(data);
-            return cipher.doFinal();
+            return cipher.doFinal(data);
 
         }catch (Exception s)
         {
@@ -132,6 +132,7 @@ public class SecurityManagerImpl implements SecurityManager {
             return null;
         }
     }
+
 
     static {
 

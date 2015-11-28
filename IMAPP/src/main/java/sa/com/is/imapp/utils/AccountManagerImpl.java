@@ -3,6 +3,7 @@ package sa.com.is.imapp.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.primefaces.util.Base64;
+import sa.com.is.imapp.db.beans.AccountsDAO;
 import sa.com.is.imapp.models.Account;
 
 import java.io.ByteArrayOutputStream;
@@ -20,10 +21,13 @@ public class AccountManagerImpl implements AccountManager {
 
     private SystemConfiguration configuration;
 
+    private AccountsDAO accountsDAO;
 
-    public AccountManagerImpl(){
+
+    public AccountManagerImpl(AccountsDAO accountsDAO){
         securityManager = new SecurityManagerImpl();
         configuration = (SystemConfiguration) SpringUtils.getSpringBean("systemConfiguration");
+        this.accountsDAO = accountsDAO;
     }
 
 
@@ -39,27 +43,38 @@ public class AccountManagerImpl implements AccountManager {
           2.Convert Json String into bytes array.
           3. Encrypt the bytes array
          */
+
         String seed = getSeed(account);
-        byte[] payload = generatePayload(seed, configuration.getNumberOfSeconds(),configuration.getNumDigits());
-        //Sign the seed value
-        byte[] signature = securityManager.generateSignature(payload);
-        //Base64 Encode the signature
-        String encodedSignature = Base64.encodeToString(signature,false);
-        byte[] encryptedSymmetricKey = securityManager.generateKey();
-        String encodedSymmetricKey = Base64.encodeToString(encryptedSymmetricKey, false);
-        //Create an enveloped Data
+        //Generate the payload that will be signed
+        byte[] payload = generatePayload(seed, configuration.getNumberOfSeconds(), configuration.getNumDigits());
+        //Generate the symmetric key
+        byte[] symmetricKey = securityManager.generateKey();
+        //byte[] encryptedSymmetricKey = securityManager.encryptSymmetricKey(symmetricKey);
+        //Create the enveloped Data
         EnvelopedData envelopedData = new EnvelopedData();
-        envelopedData.setKey(Base64.encodeToString(securityManager.encryptSymmetricKey(encryptedSymmetricKey),false));
+        envelopedData.setKey(Base64.encodeToString(symmetricKey,false));
         envelopedData.setSeconds(configuration.getNumberOfSeconds());
-        envelopedData.setSeed(Base64.encodeToString(securityManager.encryptEnvelope(seed.getBytes(CHARSET_ENCODING)),false));
-        envelopedData.setSignature(Base64.encodeToString(signature,false));
+        byte[] encryptedSeed = securityManager.encryptEnvelope(seed.getBytes(CHARSET_ENCODING),symmetricKey);
+        envelopedData.setSeed(Base64.encodeToString(encryptedSeed, false));
         envelopedData.setNumDigits(configuration.getNumDigits());
-        //Convert that into Json
-        Gson gson = new GsonBuilder().create();
-        //The Json String representation of the enveloped Data
-        String jsonString = gson.toJson(envelopedData);
+
+        //save the following into the database
+        sa.com.is.imapp.db.models.Account dbAccount = envelopedData.toAccount(configuration);
+        dbAccount.setAccountName(account.getUserName());
+        boolean result = this.accountsDAO.insertAccount(dbAccount);
+
+        String redirectUrl = null;
+
+        if(result)
+        {
+           redirectUrl = String.format("http://%s:%s/imapp/%s/activate?id=%s",configuration.getServerAddress(),configuration.getPort(),
+                   configuration.getRestPath(),dbAccount.getId());
+        }
+
+
+
         //Encrypt that
-        return jsonString;
+        return redirectUrl;
 
     }
 
@@ -71,7 +86,7 @@ public class AccountManagerImpl implements AccountManager {
         gzipOutputStream.write(payload);
         gzipOutputStream.flush();
         gzipOutputStream.close();
-
+        //Base64.encodeToString(outputStream.toByteArray(),false);
         return Base64.encodeToString(outputStream.toByteArray(),false);
 
     }

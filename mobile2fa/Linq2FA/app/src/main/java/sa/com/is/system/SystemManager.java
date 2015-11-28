@@ -9,4 +9,6 @@ import sa.com.is.utils.VerificationResult;
 public interface SystemManager {
 
     public VerificationResult verifyContents(String contents , EnvelopedData data);
+    public boolean activatedAccount();
+    public boolean isPinPasswordCorrect(String password);
 }

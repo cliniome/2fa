@@ -1,7 +1,13 @@
 package sa.com.is.imapp.beans;
 
 import org.primefaces.event.FlowEvent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import sa.com.is.imapp.db.beans.AccountsDAO;
 import sa.com.is.imapp.models.Account;
+import sa.com.is.imapp.spring.SpringSystemBridge;
+import sa.com.is.imapp.spring.SystemService;
 import sa.com.is.imapp.utils.AccountManagerImpl;
 
 import javax.annotation.PostConstruct;
@@ -10,6 +16,8 @@ import java.io.Serializable;
 /**
  * Created by snouto on 22/11/15.
  */
+@Component("accountActivationBean")
+@Scope("prototype")
 public class AccountActivationBean implements Serializable {
 
     private String firstName;
@@ -17,12 +25,22 @@ public class AccountActivationBean implements Serializable {
     private String emailAddress;
     private String userName;
     private AccountManagerImpl accountManager;
-
     private String qrPayload = "http://www.is.com.sa";
+
+    private SystemService systemService;
 
     @PostConstruct
     public void onInit(){
-        accountManager = new AccountManagerImpl();
+       try
+       {
+          // AccountsDAO accountsDAO = (AccountsDAO) SpringUtils.getSpringBean("accountDAO");
+           systemService = SpringSystemBridge.services();
+           accountManager = new AccountManagerImpl(systemService.getAccountsDAO());
+
+       }catch (Exception s)
+       {
+           s.printStackTrace();
+       }
     }
 
 
@@ -41,7 +59,7 @@ public class AccountActivationBean implements Serializable {
                     String tempPayload = accountManager.generateQR(account);
                     if(tempPayload != null)
                     {
-                        qrPayload = accountManager.compress(tempPayload);
+                        qrPayload = tempPayload;
 
                         clear();
                     }
@@ -116,4 +134,6 @@ public class AccountActivationBean implements Serializable {
     public void setQrPayload(String qrPayload) {
         this.qrPayload = qrPayload;
     }
+
+
 }

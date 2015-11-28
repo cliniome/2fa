@@ -34,6 +34,7 @@ public class DatabaseManager {
             ContentValues cv = new ContentValues();
             cv.put(FADBHelper.PRIMARY_KEY,UUID.randomUUID().toString());
             cv.put(FADBHelper.ACTIVATED,1);
+            cv.put(FADBHelper.ACCOUNT_NAME,data.getAccountName());
             cv.put(FADBHelper.BIN_PASSWD,data.getBinPassword());
             cv.put(FADBHelper.NUMBER_OF_SECONDS,data.getSeconds());
             cv.put(FADBHelper.SEED_VALUE, data.getSeed());
@@ -67,6 +68,39 @@ public class DatabaseManager {
 
             String[] AllColumns = dbHelper.getAllColumns();
             String WhereClause = FADBHelper.ACTIVATED + "=" + 1;
+            String[] whereArgs = null;
+            String groupBy = null;
+            String having = null;
+            String order = null;
+
+            Cursor cursor = db.query(FADBHelper.TABLE_NAME, AllColumns, WhereClause, whereArgs, groupBy, having, order);
+
+            return cursor.moveToNext();
+
+
+
+        }catch (Exception s)
+        {
+            s.printStackTrace();
+            return false;
+        }
+
+        finally {
+
+            db.close();
+        }
+    }
+
+
+    public boolean verifyPinPassword(String password)
+    {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        try
+        {
+
+            String[] AllColumns = dbHelper.getAllColumns();
+            String WhereClause = FADBHelper.ACTIVATED + "=" + 1 + " & " + FADBHelper.BIN_PASSWD + "=" + password;
             String[] whereArgs = null;
             String groupBy = null;
             String having = null;
@@ -125,6 +159,11 @@ public class DatabaseManager {
                 //Seed
                 columnIndex = cursor.getColumnIndex(FADBHelper.SEED_VALUE);
                 envelopedData.setSeed(cursor.getString(columnIndex));
+
+
+                //Account Name
+                columnIndex = cursor.getColumnIndex(FADBHelper.ACCOUNT_NAME);
+                envelopedData.setAccountName(cursor.getString(columnIndex));
             }
 
 

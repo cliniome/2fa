@@ -1,6 +1,9 @@
 package sa.com.is.imapp.utils;
 
+import sa.com.is.imapp.db.models.Account;
+
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * Created by snouto on 25/11/15.
@@ -8,19 +11,34 @@ import java.io.Serializable;
 public class EnvelopedData implements Serializable {
 
     private String seed;
-    private String signature;
     private int seconds;
     private String key;
     private int numDigits;
+    private String accountName;
 
     public EnvelopedData(){}
-    public EnvelopedData(String seed , String signature , int seconds,String key,int numDigits)
+    public EnvelopedData(String seed  , int seconds,String key,int numDigits)
     {
         this.setSeed(seed);
-        this.setSignature(signature);
+
         this.setSeconds(seconds);
         this.setKey(key);
         this.setNumDigits(numDigits);
+    }
+
+
+
+    public Account toAccount(SystemConfiguration configuration){
+
+        Account dbAccount = new Account();
+        dbAccount.setDeleted(false);
+        dbAccount.setId(UUID.randomUUID().toString());
+        dbAccount.setNumOfDigits(this.getNumDigits());
+        dbAccount.setNumOfSeconds(this.getSeconds());
+        dbAccount.setSeedValue(this.getSeed());
+        dbAccount.setSymmetricAlgorithmName(configuration.getSymmetricKeyAlgorithm());
+        dbAccount.setSymmetricKey(this.getKey());
+        return dbAccount;
     }
 
     public String getSeed() {
@@ -31,13 +49,6 @@ public class EnvelopedData implements Serializable {
         this.seed = seed;
     }
 
-    public String getSignature() {
-        return signature;
-    }
-
-    public void setSignature(String signature) {
-        this.signature = signature;
-    }
 
     public int getSeconds() {
         return seconds;
@@ -61,5 +72,13 @@ public class EnvelopedData implements Serializable {
 
     public void setNumDigits(int numDigits) {
         this.numDigits = numDigits;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
 }

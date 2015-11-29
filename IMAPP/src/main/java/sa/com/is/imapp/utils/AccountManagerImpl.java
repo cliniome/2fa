@@ -117,6 +117,7 @@ public class AccountManagerImpl implements AccountManager {
         //Append the OTP_seed with the String representation of the generated hashcode
         String finalSeed = configuration.getInitialSeed() + String.valueOf(hashcode);
 
+
         return finalSeed;
     }
 

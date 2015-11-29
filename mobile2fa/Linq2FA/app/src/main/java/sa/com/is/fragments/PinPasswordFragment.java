@@ -1,6 +1,7 @@
 package sa.com.is.fragments;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -27,6 +29,8 @@ public class PinPasswordFragment extends Fragment {
 
     private SystemConfiguration configuration;
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,9 +47,8 @@ public class PinPasswordFragment extends Fragment {
         try
         {
             //Get the pin password passed in
-            EditText pinpasswd = (EditText)rootView.findViewById(R.id.pin_password_txt);
 
-            final String password = pinpasswd.getText().toString();
+
 
             //Get the button when clicked
             Button pinBtn = (Button)rootView.findViewById(R.id.pinBtn);
@@ -55,27 +58,41 @@ public class PinPasswordFragment extends Fragment {
                 public void onClick(final View v) {
 
 
-                    SystemManager systemManager = new SystemManagerImpl(getConfiguration());
-
-                    if(systemManager.isPinPasswordCorrect(password))
+                    final EditText password = ((EditText)((ViewGroup) v.getParent()).findViewById(R.id.pin_password_txt));
+                    try
                     {
-                        getLoginListener().doLogin(PinPasswordFragment.this);
-                    }else
+                        SystemManager systemManager = new SystemManagerImpl(getConfiguration());
+
+                        if(systemManager.isPinPasswordCorrect(password.getText().toString()))
+                        {
+                            getLoginListener().doLogin(PinPasswordFragment.this);
+                        }else
+                        {
+                            AlertDialog dialog = new AlertDialog.Builder(getConfiguration().getContext())
+                                    .setTitle("Invalid Login Details")
+                                    .setIcon(R.drawable.error)
+                                    .setMessage("Pin Password entered is incorrect. Try again !")
+                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                            password.setText("");
+                                            dialog.dismiss();
+                                        }
+                                    }).create();
+
+                            dialog.show();
+                        }
+
+                    }catch (Exception s)
                     {
-                        AlertDialog dialog = new AlertDialog.Builder(getConfiguration().getContext())
-                                .setTitle("Invalid Login Details")
-                                .setIcon(R.drawable.error)
-                                .setMessage("Pin Password entered is incorrect. Try again !")
-                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
+                        s.printStackTrace();
+                    }
 
-                                        ((EditText)v).setText("");
-                                        dialog.dismiss();
-                                    }
-                                }).create();
+                    finally {
 
-                        dialog.show();
+                        InputMethodManager imm = (InputMethodManager)PinPasswordFragment.this.getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(password.getWindowToken(), 0);
                     }
 
 
@@ -86,6 +103,8 @@ public class PinPasswordFragment extends Fragment {
         {
             s.printStackTrace();
         }
+
+
     }
 
 
@@ -104,4 +123,5 @@ public class PinPasswordFragment extends Fragment {
     public void setConfiguration(SystemConfiguration configuration) {
         this.configuration = configuration;
     }
+
 }

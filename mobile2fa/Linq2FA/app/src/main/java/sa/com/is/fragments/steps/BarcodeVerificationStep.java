@@ -26,6 +26,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import sa.com.is.activity.MainActivity;
 import sa.com.is.activity.R;
 import sa.com.is.db.DatabaseManager;
 import sa.com.is.fragments.WizardFragment;
@@ -89,9 +90,12 @@ public class BarcodeVerificationStep extends Fragment implements WizardStep {
                         @Override
                         public void onClick(View v) {
                             //open the capture activity in here
+                            MainActivity.SHOULD_RESUME = false;
                             Intent intent = new Intent("com.google.zxing.client.android.SCAN");
                             intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
                             startActivityForResult(intent, BARCODE_REQUEST_CODE);
+                           /* String url = "http://192.168.1.4:8080/imapp/rest/account/activate?id=34d8b32c-f044-40d3-b9fb-16731aaba553";
+                            processContents(url);*/
 
 
 
@@ -149,6 +153,7 @@ public class BarcodeVerificationStep extends Fragment implements WizardStep {
 
             if(contents != null && contents.length() > 0 )
             {
+                MainActivity.SHOULD_RESUME = true;
                 //give it to the system Manager to process it on another thread other than the Main UI Thread
                 processContents(contents);
             }else

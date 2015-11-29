@@ -34,6 +34,7 @@ public class DatabaseManager {
             ContentValues cv = new ContentValues();
             cv.put(FADBHelper.PRIMARY_KEY,UUID.randomUUID().toString());
             cv.put(FADBHelper.ACTIVATED,1);
+            cv.put(FADBHelper.NUM_OF_DIGITS,data.getNumDigits());
             cv.put(FADBHelper.ACCOUNT_NAME,data.getAccountName());
             cv.put(FADBHelper.BIN_PASSWD,data.getBinPassword());
             cv.put(FADBHelper.NUMBER_OF_SECONDS,data.getSeconds());
@@ -100,7 +101,7 @@ public class DatabaseManager {
         {
 
             String[] AllColumns = dbHelper.getAllColumns();
-            String WhereClause = FADBHelper.ACTIVATED + "=" + 1 + " & " + FADBHelper.BIN_PASSWD + "=" + password;
+            String WhereClause = FADBHelper.ACTIVATED + "=" + 1 + " AND " + FADBHelper.BIN_PASSWD + "='" + password + "'";
             String[] whereArgs = null;
             String groupBy = null;
             String having = null;
@@ -164,6 +165,10 @@ public class DatabaseManager {
                 //Account Name
                 columnIndex = cursor.getColumnIndex(FADBHelper.ACCOUNT_NAME);
                 envelopedData.setAccountName(cursor.getString(columnIndex));
+
+                //Num of digits
+                columnIndex = cursor.getColumnIndex(FADBHelper.NUM_OF_DIGITS);
+                envelopedData.setNumDigits(cursor.getInt(columnIndex));
             }
 
 

@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import com.google.zxing.client.android.PreferencesActivity;
 
+import sa.com.is.db.DatabaseManager;
 import sa.com.is.fragments.Linq2FAMainFragment;
 import sa.com.is.fragments.PinPasswordFragment;
 import sa.com.is.fragments.WizardFragment;
@@ -29,6 +30,8 @@ public class MainActivity extends ActionBarActivity implements LoginListener {
 
     private WizardFragment wizardFragment;
 
+    public static  boolean SHOULD_RESUME = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +43,13 @@ public class MainActivity extends ActionBarActivity implements LoginListener {
     @Override
     protected void onResume() {
         super.onResume();
-        loadMainFragment();
+
+
+        DatabaseManager manager = new DatabaseManager(this);
+        if(manager.isAccountActivated())
+        {
+            loadMainFragment();
+        }
     }
 
 
@@ -183,7 +192,7 @@ public class MainActivity extends ActionBarActivity implements LoginListener {
 
             Linq2FAMainFragment mainFragment = new Linq2FAMainFragment();
             //set the main fragment in here
-
+            mainFragment.setContext(this);
             //finally load it
             loadThis(mainFragment);
 

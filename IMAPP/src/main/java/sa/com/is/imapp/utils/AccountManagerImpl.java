@@ -112,7 +112,7 @@ public class AccountManagerImpl implements AccountManager {
 
         //Get the temp Hashcode by adding the absolute value of the Fixed OTP Seed Value + The absolute value
         // of the account UserName
-        int hashcode = hashCode(configuration.getInitialSeed()) + hashCode(account.getUserName());
+        int hashcode = hashCode(account.getUserName());
 
         //Append the OTP_seed with the String representation of the generated hashcode
         String finalSeed = configuration.getInitialSeed() + String.valueOf(hashcode);

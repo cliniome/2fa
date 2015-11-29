@@ -14,19 +14,20 @@ public class FADBHelper extends SQLiteOpenHelper {
     public static final String PRIMARY_KEY = "ID";
     public static final String ACTIVATED = "ACTIVATED";
     public static final String BIN_PASSWD = "BINPASS";
+    public static final String NUM_OF_DIGITS = "NUM_DIGITS";
     public static final String SEED_VALUE = "SEEDVAL";
     public static final String NUMBER_OF_SECONDS = "SECONDS_NUM";
     public static final String ACCOUNT_NAME="ACCOUNT_NAME";
     public static final String TABLE_NAME ="ACCOUNT";
     private static final String CREATE_DATABASE_TABLE = "create table "+ TABLE_NAME + " ( "
             +PRIMARY_KEY +" text primary key," + ACTIVATED + " int not null , " +
-            BIN_PASSWD + " text not null," + SEED_VALUE + " text not null , "+
+            BIN_PASSWD + " text not null," + SEED_VALUE + " text not null , "+ NUM_OF_DIGITS + " int not null ," +
             ACCOUNT_NAME + " text not null," +
             NUMBER_OF_SECONDS + " int not null)";
 
     public String[] getAllColumns(){
 
-        return new String[] {PRIMARY_KEY,ACTIVATED,BIN_PASSWD,SEED_VALUE,NUMBER_OF_SECONDS,ACCOUNT_NAME};
+        return new String[] {PRIMARY_KEY,ACTIVATED,BIN_PASSWD,SEED_VALUE,NUMBER_OF_SECONDS,ACCOUNT_NAME,NUM_OF_DIGITS};
     }
 
 

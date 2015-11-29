@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a70a5ab5-01ae-4da5-9d1a-107a04d6c7f4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/appContext.xml" afterPath="$PROJECT_DIR$/web/WEB-INF/appContext.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../mobile2fa/Linq2FA/app/src/main/res/values-ar/strings.xml" afterPath="$PROJECT_DIR$/../mobile2fa/Linq2FA/app/src/main/res/values-ar/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="IMAPP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -861,7 +860,7 @@
       <workItem from="1448721460088" duration="5436000" />
       <workItem from="1448726911894" duration="7605000" />
       <workItem from="1448751642594" duration="2344000" />
-      <workItem from="1448777835150" duration="1836000" />
+      <workItem from="1448777835150" duration="2271000" />
     </task>
     <task id="LOCAL-00001" summary="Second Push">
       <created>1448391817674</created>
@@ -909,7 +908,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58249000" />
+    <option name="totallyTimeSpent" value="58684000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1215" height="1000" extended-state="6" />

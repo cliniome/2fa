@@ -63,8 +63,8 @@ public class Linq2FAMainFragment extends Fragment {
             //Get the current active enveloped data
             envelopedData = databaseManager.getActiveAccount();
             //initial View
-            if(expired || otpView == null)
-            {
+
+
                 otpView = (LinearLayout)rootView.findViewById(R.id.otpview);
                 otpView.setTag(this);
 
@@ -74,7 +74,7 @@ public class Linq2FAMainFragment extends Fragment {
 
                 otpView.invalidate();
                 otpView.requestLayout();
-            }
+
             //set on Click listener
             otpView.setOnClickListener(new View.OnClickListener() {
                 @Override

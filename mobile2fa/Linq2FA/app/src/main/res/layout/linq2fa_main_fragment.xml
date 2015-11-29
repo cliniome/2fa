@@ -24,14 +24,16 @@
                 android:text="Account Name goes here"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16dp" />
+                android:textSize="24dp"
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/otp_value"
                 android:text="OTP Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="50dp" />
+                android:textSize="50dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -42,6 +44,7 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:indeterminate="false"
             android:layout_weight="0"
+            android:layout_marginRight="5dp"
             android:layout_height="match_parent"
             android:max="100"
             android:progress="90"

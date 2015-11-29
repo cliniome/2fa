@@ -113,6 +113,10 @@ public class Linq2FAMainFragment extends Fragment {
 
         //initialize the views to their initial defaults
 
+        if(countDownTimer !=null)
+        {
+            countDownTimer.cancel();
+        }
         //apply them to the ui
         this.accountNameUI.setText(accountName);
         this.otpTextValue.setText(otpValue);

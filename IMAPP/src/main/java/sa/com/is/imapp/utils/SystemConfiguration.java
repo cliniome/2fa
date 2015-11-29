@@ -15,6 +15,8 @@ public class SystemConfiguration {
     private String serverAddress;
     private int port;
     private String restPath;
+    private String otpProvider;
+    private int validWindow;
 
     public String getPrivateKeyLocation() {
         return privateKeyLocation;
@@ -94,5 +96,21 @@ public class SystemConfiguration {
 
     public void setRestPath(String restPath) {
         this.restPath = restPath;
+    }
+
+    public int getValidWindow() {
+        return validWindow;
+    }
+
+    public void setValidWindow(int validWindow) {
+        this.validWindow = validWindow;
+    }
+
+    public String getOtpProvider() {
+        return otpProvider;
+    }
+
+    public void setOtpProvider(String otpProvider) {
+        this.otpProvider = otpProvider;
     }
 }

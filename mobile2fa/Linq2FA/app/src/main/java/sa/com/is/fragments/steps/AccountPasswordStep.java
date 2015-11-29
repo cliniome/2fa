@@ -106,7 +106,7 @@ public class AccountPasswordStep extends Fragment implements WizardStep {
         {
             String pin_passwd = pinPasswordText.getText().toString();
 
-            if(pin_passwd != null && pin_passwd.length() >= 8)
+            if(pin_passwd != null && pin_passwd.length() >= 4)
                 return true;
             else return false;
 

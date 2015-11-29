@@ -37,14 +37,16 @@ http://www.springframework.org/schema/jee
        <bean id="systemConfiguration" class="sa.com.is.imapp.utils.SystemConfiguration">
               <property name="encryptionModeType" value="RSA/ECB/OAEPWithSHA1AndMGF1Padding"/>
               <property name="initialSeed" value="0"/>
-              <property name="numberOfSeconds" value="60"/>
+              <property name="numberOfSeconds" value="30"/>
               <property name="privateKeyLocation" value="/home/snouto/is/Projects/IMAPP/src/main/java/sa/com/is/imapp/utils/signingprivatekey.der"/>
               <property name="publicKeyLocation" value="/home/snouto/is/Projects/IMAPP/src/main/java/sa/com/is/imapp/utils/public.der"/>
               <property name="symmetricKeyAlgorithm" value="DESede"/>
-              <property name="numDigits" value="8"/>
+              <property name="numDigits" value="5"/>
               <property name="port" value="8080"/>
               <property name="serverAddress" value="10.10.30.72"/>
               <property name="restPath" value="rest/account"/>
+              <property name="validWindow" value="300"/>
+              <property name="otpProvider" value="totp"/>
 
        </bean>
 

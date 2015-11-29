@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+
+    <ui:composition template="templates/masterLayout.xhtml">
+
+        <ui:define name="contentSection">
+
+            <p:panel styleClass="col-centered" header="Validate OTP Password">
+
+                <p:messages id="growl"/>
+
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="User Name"/>
+                    <h:inputText style="width: 300px;" required="true" requiredMessage="User Name value is required"
+                                 value="#{accountValidator.userName}"
+                                 />
+
+                    <h:outputLabel value="OTP Value"/>
+                    <h:inputSecret required="true" requiredMessage="OTP Value is required"
+                                   value="#{accountValidator.otpValue}"
+                                   style="width: 300px;"
+                                   />
+                    <br/>
+                    <h:commandButton value="Validate OTP" styleClass="btn btn-lg btn-success"
+                                     actionListener="#{accountValidator.onValidate}"
+                            />
+                </h:panelGrid>
+
+            </p:panel>
+
+        </ui:define>
+
+    </ui:composition>
+
+</f:view>
+</html>

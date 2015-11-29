@@ -12,7 +12,12 @@
         <managed-bean-name>accountActivator</managed-bean-name>
         <managed-bean-class>sa.com.is.imapp.beans.AccountActivationBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 
+    <managed-bean>
+        <managed-bean-name>accountValidator</managed-bean-name>
+        <managed-bean-class>sa.com.is.imapp.beans.AccountVerificationBean</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
   
 </faces-config>

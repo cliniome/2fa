@@ -16,7 +16,7 @@
 
 package com.google.zxing.client.android.share;
 
-import sa.com.is.activity.R;
+import sa.com.nadec.milk.R;
 
 import android.content.Context;
 import android.database.Cursor;

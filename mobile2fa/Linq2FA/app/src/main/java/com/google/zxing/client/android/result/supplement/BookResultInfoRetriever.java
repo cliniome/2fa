@@ -24,7 +24,7 @@ import android.content.Context;
 import android.widget.TextView;
 import com.google.zxing.client.android.HttpHelper;
 import com.google.zxing.client.android.LocaleManager;
-import sa.com.is.activity.R;
+import sa.com.nadec.milk.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

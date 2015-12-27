@@ -17,7 +17,7 @@
 package com.google.zxing.client.android.result;
 
 import com.google.zxing.Result;
-import sa.com.is.activity.R;
+import sa.com.nadec.milk.R;
 import com.google.zxing.client.result.ParsedResult;
 
 import android.app.Activity;

@@ -1,12 +1,7 @@
 package linq2fa.is.com.sa.linq2fa;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Application;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.ApplicationTestCase;
 import android.util.Base64;
 
 import com.google.gson.Gson;
@@ -22,12 +17,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import sa.com.is.activity.MainActivity;
-import sa.com.is.activity.R;
-import sa.com.is.fragments.WizardFragment;
-import sa.com.is.models.EnvelopedData;
-import sa.com.is.security.SecurityManagerImpl;
-import sa.com.is.security.SystemConfiguration;
+import sa.com.nadec.milk.activity.MainActivity;
+import sa.com.nadec.milk.fragments.WizardFragment;
+import sa.com.nadec.milk.models.EnvelopedData;
+import sa.com.nadec.milk.security.SecurityManagerImpl;
+import sa.com.nadec.milk.security.SystemConfiguration;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
@@ -125,7 +119,7 @@ public class ApplicationTest extends ActivityInstrumentationTestCase2<MainActivi
                         configuration.setEncdecryptMode(ENCRYPTION_DECRYPTION_MODE);
                         configuration.setContext(getActivity());
 
-                        sa.com.is.security.SecurityManager securityManager = new SecurityManagerImpl(configuration);
+                        sa.com.nadec.milk.security.SecurityManager securityManager = new SecurityManagerImpl(configuration);
 
                         byte[] SeedBytes = envelopedData.getSeed().getBytes("UTF-8");
                         byte[] decodedSeedBytes = Base64.decode(SeedBytes, Base64.DEFAULT);

@@ -24,7 +24,7 @@ import android.widget.ArrayAdapter;
 
 import java.util.List;
 
-import sa.com.is.activity.R;
+import sa.com.nadec.milk.R;
 
 
 /**

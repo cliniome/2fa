@@ -32,7 +32,8 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-import sa.com.is.activity.R;
+import sa.com.nadec.milk.R;
+
 
 /**
  * This view is overlaid on top of the camera preview. It adds the viewfinder rectangle and partial

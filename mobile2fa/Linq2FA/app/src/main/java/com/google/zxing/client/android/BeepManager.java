@@ -29,7 +29,7 @@ import android.util.Log;
 import java.io.Closeable;
 import java.io.IOException;
 
-import sa.com.is.activity.R;
+import sa.com.nadec.milk.R;
 
 /**
  * Manages beeps and vibrations for {@link CaptureActivity}.

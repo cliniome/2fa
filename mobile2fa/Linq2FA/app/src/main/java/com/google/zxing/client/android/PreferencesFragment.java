@@ -30,7 +30,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 
-import sa.com.is.activity.R;
+import sa.com.nadec.milk.R;
 
 public final class PreferencesFragment 
     extends PreferenceFragment 

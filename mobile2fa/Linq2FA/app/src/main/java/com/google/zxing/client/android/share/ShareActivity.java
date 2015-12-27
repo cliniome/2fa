@@ -20,7 +20,7 @@ import android.provider.ContactsContract;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.client.android.Contents;
 import com.google.zxing.client.android.Intents;
-import sa.com.is.activity.R;
+import sa.com.nadec.milk.R;
 
 import android.app.Activity;
 import android.content.ContentResolver;

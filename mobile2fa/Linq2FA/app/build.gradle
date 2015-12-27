@@ -3,17 +3,18 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
-
     defaultConfig {
-        applicationId "linq2fa.is.com.sa.linq2fa"
+        applicationId 'nadec.com.sa.milk.fa'
         minSdkVersion 14
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
     buildTypes {
-        linq2fa {
+        nadec {
         }
+    }
+    productFlavors {
     }
 }
 

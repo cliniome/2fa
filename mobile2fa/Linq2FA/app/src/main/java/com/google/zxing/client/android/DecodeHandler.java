@@ -34,7 +34,7 @@ import android.util.Log;
 import java.io.ByteArrayOutputStream;
 import java.util.Map;
 
-import sa.com.is.activity.R;
+import sa.com.nadec.milk.R;
 
 final class DecodeHandler extends Handler {
 

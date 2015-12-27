@@ -36,7 +36,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.google.zxing.client.android.CaptureActivity;
 import com.google.zxing.client.android.Intents;
-import sa.com.is.activity.R;
+import sa.com.nadec.milk.R;
 
 public final class HistoryActivity extends ListActivity {
 

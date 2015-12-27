@@ -24,7 +24,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.android.Contents;
 import com.google.zxing.client.android.FinishListener;
 import com.google.zxing.client.android.Intents;
-import sa.com.is.activity.R;
+import sa.com.nadec.milk.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;

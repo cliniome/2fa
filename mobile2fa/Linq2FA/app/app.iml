@@ -102,8 +102,8 @@
     <orderEntry type="library" exported="" name="mail-1.52.0.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.1.1" level="project" />
     <orderEntry type="library" exported="" name="activation" level="project" />
-    <orderEntry type="library" exported="" name="android-core-3.1.0" level="project" />
     <orderEntry type="library" exported="" name="gson-2.5" level="project" />
+    <orderEntry type="library" exported="" name="android-core-3.1.0" level="project" />
     <orderEntry type="library" exported="" name="android-sun-jarsign-support-1.1" level="project" />
   </component>
 </module>

@@ -21,7 +21,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.webkit.WebView;
 
-import sa.com.is.activity.R;
+import sa.com.nadec.milk.R;
 
 /**
  * An HTML-based help screen.

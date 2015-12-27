@@ -40,7 +40,7 @@ http://www.springframework.org/schema/jee
               <property name="privateKeyLocation" value="/home/snouto/is/Projects/IMAPP/src/main/java/sa/com/is/imapp/utils/signingprivatekey.der"/>
               <property name="publicKeyLocation" value="/home/snouto/is/Projects/IMAPP/src/main/java/sa/com/is/imapp/utils/public.der"/>
               <property name="symmetricKeyAlgorithm" value="DESede"/>
-              <property name="numDigits" value="5"/>
+              <property name="numDigits" value="7"/>
               <property name="port" value="8080"/>
               <property name="serverAddress" value="10.10.30.72"/>
               <property name="restPath" value="rest/account"/>

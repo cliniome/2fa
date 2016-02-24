@@ -11,6 +11,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 
 /**
  * Created by snouto on 29/11/15.
@@ -73,16 +75,23 @@ public class AccountVerificationBean implements Serializable {
 
     private String getSeed(String account){
 
-        //Get the temp Hashcode by adding the absolute value of the Fixed OTP Seed Value + The absolute value
-        // of the account UserName
-        int hashcode = hashCode(account);
 
-        //Append the OTP_seed with the String representation of the generated hashcode
-        String finalSeed = systemService.getConfiguration().getInitialSeed() + String.valueOf(hashcode);
-
+        String finalSeed = toHex(account);
 
         return finalSeed;
     }
+
+    public String toHex(String arg) {
+        try {
+            return String.format("%040x", new BigInteger(1, arg.getBytes("UTF-8")));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+
+            return "";
+        }
+    }
+
+
 
     private int hashCode(String value)
     {

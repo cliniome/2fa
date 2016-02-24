@@ -17,7 +17,7 @@
     <TextView
         android:id="@+id/txtbinpasswd"
         android:layout_below="@id/logoImg"
-        android:text="@string/bin_password_text"
+        android:text="@string/pin_password_verify_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:password="false"
@@ -29,8 +29,7 @@
         android:layout_below="@id/txtbinpasswd"
         android:layout_height="wrap_content"
         android:password="true"
-        android:inputType="textPassword"
-        android:hint="Choose a Pin Password"
+        android:hint="Re-Enter Your Application PIN"
         android:id="@+id/pinPassword"
         />
 

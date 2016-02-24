@@ -17,6 +17,7 @@
 
 package org.kamranzafar.otp.provider;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.math.BigInteger;
 import java.security.GeneralSecurityException;
@@ -82,6 +83,20 @@ public class TOTPProvider extends OTPProviderBase {
 		}
 	}
 
+	private static String bytesToString(byte[] bytes){
+
+		String bytesString = "[";
+
+		for(byte current : bytes){
+
+			bytesString += current + ",";
+		}
+		bytesString += "]";
+
+
+		return bytesString;
+	}
+
 	/**
 	 * This method converts a HEX string to Byte[]
 	 * 
@@ -94,13 +109,26 @@ public class TOTPProvider extends OTPProviderBase {
 	private static byte[] hexStr2Bytes(String hex) {
 		// Adding one byte to get the right conversion
 		// Values starting with "0" can be converted
-		byte[] bArray = new BigInteger("10" + hex, 16).toByteArray();
+		/*byte[] bArray = new BigInteger("10" + hex, 16).toByteArray();
+
+		System.out.println("bArray : " + bytesToString(bArray));
 
 		// Copy all the REAL bytes, not the "first"
 		byte[] ret = new byte[bArray.length - 1];
 		for (int i = 0; i < ret.length; i++)
 			ret[i] = bArray[i + 1];
-		return ret;
+
+
+		System.out.println("ret : " + bytesToString(ret));*/
+
+		//return ret;
+
+		try {
+			return hex.getBytes("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	/**
@@ -129,11 +157,19 @@ public class TOTPProvider extends OTPProviderBase {
 		while (time.length() < 16)
 			time = "0" + time;
 
+		System.out.println("Time after while loop : " + time);
+
 		// Get the HEX in a Byte[]
 		byte[] msg = hexStr2Bytes(time);
+
+		System.out.println("MSG Bytes after Hex : " + bytesToString(msg));
 		byte[] k = hexStr2Bytes(key);
 
+		System.out.println("secret Bytes after Hex : " + bytesToString(k));
+
 		byte[] hash = hmac_sha(crypto, k, msg);
+
+		System.out.println("HMAC Bytes : " + bytesToString(msg));
 
 		// put selected bytes into result int
 		int offset = hash[hash.length - 1] & 0xf;
@@ -141,7 +177,13 @@ public class TOTPProvider extends OTPProviderBase {
 		int binary = ((hash[offset] & 0x7f) << 24) | ((hash[offset + 1] & 0xff) << 16)
 				| ((hash[offset + 2] & 0xff) << 8) | (hash[offset + 3] & 0xff);
 
+		System.out.println("Binary variable : "  + binary);
+
+		System.out.println("Pow Function : " + ((int) Math.pow(10, codeDigits)));
+
 		int otp = binary % ((int) Math.pow(10, codeDigits));
+
+		System.out.println("OTP before final while loop : " + otp);
 
 		result = Integer.toString(otp);
 		while (result.length() < codeDigits) {

@@ -4,6 +4,14 @@
     android:layout_marginTop="10dp"
     android:layout_height="wrap_content">
 
+    <ImageView
+        android:id="@+id/logoImg"
+        android:layout_width="wrap_content"
+        android:src="@drawable/globaltop"
+        android:layout_marginBottom="25dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" />
+
 
     <LinearLayout
         android:id="@+id/otpview"
@@ -56,6 +64,15 @@
     </LinearLayout>
 
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minHeight="96dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="V1.2"
+        android:layout_gravity="bottom" />
 
 </LinearLayout>

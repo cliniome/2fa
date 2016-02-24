@@ -42,6 +42,9 @@ public class OTP {
 
 				String currentOtp = generate(key,String.valueOf(i),digits,provider);
 
+
+
+
 				if(currentOtp !=null && currentOtp.equals(otp))
 				{
 					result = true;

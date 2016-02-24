@@ -42,7 +42,7 @@ http://www.springframework.org/schema/jee
               <property name="symmetricKeyAlgorithm" value="DESede"/>
               <property name="numDigits" value="7"/>
               <property name="port" value="8080"/>
-              <property name="serverAddress" value="10.10.30.72"/>
+              <property name="serverAddress" value="192.168.1.7"/>
               <property name="restPath" value="rest/account"/>
               <property name="validWindow" value="300"/>
               <property name="otpProvider" value="totp"/>

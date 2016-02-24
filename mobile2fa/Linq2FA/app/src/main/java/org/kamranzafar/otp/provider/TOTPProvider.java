@@ -17,6 +17,7 @@
 
 package org.kamranzafar.otp.provider;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.math.BigInteger;
 import java.security.GeneralSecurityException;
@@ -94,13 +95,19 @@ public class TOTPProvider extends OTPProviderBase {
 	private static byte[] hexStr2Bytes(String hex) {
 		// Adding one byte to get the right conversion
 		// Values starting with "0" can be converted
-		byte[] bArray = new BigInteger("10" + hex, 16).toByteArray();
+		/*byte[] bArray = new BigInteger("10" + hex, 16).toByteArray();
 
 		// Copy all the REAL bytes, not the "first"
 		byte[] ret = new byte[bArray.length - 1];
 		for (int i = 0; i < ret.length; i++)
 			ret[i] = bArray[i + 1];
-		return ret;
+		return ret;*/
+		try {
+			return hex.getBytes("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	/**

@@ -7,6 +7,8 @@ import sa.com.is.imapp.db.beans.AccountsDAO;
 import sa.com.is.imapp.models.Account;
 
 import java.io.ByteArrayOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.util.zip.GZIPOutputStream;
 
 /**
@@ -55,7 +57,8 @@ public class AccountManagerImpl implements AccountManager {
         envelopedData.setKey(Base64.encodeToString(symmetricKey,false));
         envelopedData.setSeconds(configuration.getNumberOfSeconds());
         byte[] encryptedSeed = securityManager.encryptEnvelope(seed.getBytes(CHARSET_ENCODING),symmetricKey);
-        envelopedData.setSeed(Base64.encodeToString(encryptedSeed, false));
+        System.out.println("seed Value is : " + seed);
+        envelopedData.setSeed(Base64.encodeToString(seed.getBytes(CHARSET_ENCODING), false));
         envelopedData.setNumDigits(configuration.getNumDigits());
 
         //save the following into the database
@@ -110,16 +113,23 @@ public class AccountManagerImpl implements AccountManager {
 
     private String getSeed(Account account){
 
-        //Get the temp Hashcode by adding the absolute value of the Fixed OTP Seed Value + The absolute value
-        // of the account UserName
-        int hashcode = hashCode(account.getUserName());
 
-        //Append the OTP_seed with the String representation of the generated hashcode
-        String finalSeed = configuration.getInitialSeed() + String.valueOf(hashcode);
-
+        String finalSeed = toHex(account.getUserName());
 
         return finalSeed;
     }
+
+    public String toHex(String arg) {
+        try {
+            return String.format("%040x", new BigInteger(1, arg.getBytes("UTF-8")));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+
+            return "";
+        }
+    }
+
+
 
     private int hashCode(String value)
     {

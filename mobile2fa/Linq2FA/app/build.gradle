@@ -7,14 +7,19 @@ android {
         applicationId 'nadec.com.sa.milk.fa'
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 3
-        versionName '1.2'
+        versionCode 6
+        versionName '1.3'
     }
     buildTypes {
         nadec {
         }
     }
     productFlavors {
+    }
+
+    lintOptions{
+
+        abortOnError false
     }
 }
 

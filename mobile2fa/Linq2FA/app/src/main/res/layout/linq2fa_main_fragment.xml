@@ -6,10 +6,11 @@
 
     <ImageView
         android:id="@+id/logoImg"
-        android:layout_width="wrap_content"
+        android:layout_width="192dp"
         android:src="@drawable/globaltop"
-        android:layout_marginBottom="25dp"
-        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+
+        android:layout_height="192dp"
         android:layout_gravity="center_horizontal" />
 
 
@@ -33,7 +34,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="24dp"
-                android:textStyle="bold|italic" />
+                android:layout_marginLeft="0dp"
+                android:textStyle="bold|italic"
+                android:paddingLeft="0dp"
+                android:layout_gravity="center_horizontal" />
 
             <TextView
                 android:id="@+id/otp_value"
@@ -41,7 +45,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="50dp"
-                android:textStyle="bold" />
+                android:layout_marginLeft="0dp"
+                android:textStyle="bold"
+                android:paddingLeft="0dp"
+                android:layout_gravity="center_horizontal" />
 
         </LinearLayout>
 
@@ -73,6 +80,9 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:text="V1.2"
+        android:textStyle="bold"
+        android:layout_marginLeft="5dp"
+        android:textColor="@android:color/holo_red_dark"
         android:layout_gravity="bottom" />
 
 </LinearLayout>

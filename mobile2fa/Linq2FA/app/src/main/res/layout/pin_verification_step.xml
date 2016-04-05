@@ -32,7 +32,7 @@
         android:password="true"
         android:hint="Re-Enter Your Application PIN"
         android:id="@+id/pinPassword"
-        />
+        android:singleLine="true" />
 
 
 </RelativeLayout>

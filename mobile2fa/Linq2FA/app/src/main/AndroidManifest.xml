@@ -127,6 +127,7 @@
         <activity
             android:name=".activity.MainActivity"
             android:icon="@drawable/logo"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:label="@string/appname">
 
             <intent-filter>

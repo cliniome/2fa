@@ -70,19 +70,30 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/closeAppBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/closeme"
+        android:text="Close Nadec2FA"
+        android:layout_marginTop="10dp"
+        />
+
+
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:minHeight="96dp" />
+        android:minHeight="48dp" />
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="V1.4"
+        android:text="V1.5"
         android:textStyle="bold"
         android:layout_marginLeft="5dp"
         android:textColor="@android:color/holo_red_dark"
-        android:layout_gravity="bottom" />
+        android:layout_gravity="bottom|center" />
 
 </LinearLayout>

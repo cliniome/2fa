@@ -38,6 +38,8 @@ public class OTP {
 			Long startWindow = Long.parseLong(base) - (validWindow * 1000);
 			Long endWindow = Long.parseLong(base) + (validWindow * 1000);
 
+
+
 			for(long i = startWindow;i<=endWindow;i++){
 
 				String currentOtp = generate(key,String.valueOf(i),digits,provider);

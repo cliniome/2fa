@@ -38,7 +38,7 @@ public class Linq2FAMainFragment extends Fragment {
     private static LinearLayout otpView;
     public static boolean expired = false;
 
-    private Button closeAppBtn;
+   // private Button closeAppBtn;
 
     @Nullable
     @Override
@@ -64,7 +64,7 @@ public class Linq2FAMainFragment extends Fragment {
             //Get the current active enveloped data
             envelopedData = databaseManager.getActiveAccount();
             //initialize the close app Button
-            closeAppBtn = (Button)rootView.findViewById(R.id.closeAppBtn);
+           /* closeAppBtn = (Button)rootView.findViewById(R.id.closeAppBtn);
             closeAppBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -78,7 +78,7 @@ public class Linq2FAMainFragment extends Fragment {
                     //now close the system immediately , releasing anything back to the Dalvik Process
                     System.exit(0);
                 }
-            });
+            });*/
             //initial View
 
 

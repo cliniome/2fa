@@ -70,14 +70,7 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/closeAppBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/closeme"
-        android:text="Close Nadec2FA"
-        android:layout_marginTop="10dp"
-        />
+
 
 
 

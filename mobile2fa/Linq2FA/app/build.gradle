@@ -9,7 +9,7 @@ android {
         applicationId 'linq2fa.is.com.sa.fa'
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 9
+        versionCode 10
         versionName '1.5'
     }
     buildTypes {

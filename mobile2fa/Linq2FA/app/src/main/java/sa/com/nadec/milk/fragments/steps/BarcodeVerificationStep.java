@@ -162,8 +162,7 @@ public class BarcodeVerificationStep extends Fragment implements WizardStep {
 
 
     }
-
-    private void processContents(final String contents) {
+    private  void processContents(final String contents) {
 
         try
         {
@@ -174,6 +173,7 @@ public class BarcodeVerificationStep extends Fragment implements WizardStep {
             progressDialog.setIndeterminate(true);
             progressDialog.setCancelable(false);
 
+
             //Create the Thread for verifying the current account
             final Runnable verificationThread = new Runnable() {
                 @Override
@@ -182,9 +182,40 @@ public class BarcodeVerificationStep extends Fragment implements WizardStep {
 
                     try {
 
-                        final EnvelopedData envelopedData = openConnection(new URL(contents));
+                        boolean isUrl = false;
+                        EnvelopedData envelopedData;
 
-                        boolean finalResult = updateAccountInformation(envelopedData);
+                            if (contents.startsWith("http") || contents.startsWith("https")){
+
+                                isUrl = true;
+                                envelopedData = openConnection(new URL(contents));
+
+                            }else
+                            {
+                                //it is comma separated list , access it and feel the enveloped Data
+                                envelopedData = new EnvelopedData();
+                                //parse the contents string
+                                String[] parsedContents = contents.split(",");
+                                String numOfDigits = parsedContents[0];
+                                String seconds = parsedContents[1];
+                                String actualSeed = parsedContents[2];
+                                String accountName = parsedContents[3];
+                                byte[] actualDecodedSeed = Base64.decode(actualSeed.getBytes("UTF-8"),Base64.DEFAULT);
+                                //set these values into the envelopedData
+                                envelopedData.setNumDigits(Integer.parseInt(numOfDigits));
+                                envelopedData.setSeconds(Integer.parseInt(seconds));
+                                envelopedData.setSeed(new String(actualDecodedSeed));
+                                envelopedData.setAccountName(accountName);
+
+                            }
+
+
+                        boolean finalResult = false;
+
+                        if (envelopedData != null){
+
+                            finalResult = updateAccountInformation(envelopedData, isUrl);
+                        }
 
                         if(finalResult)
                         {
@@ -250,15 +281,12 @@ public class BarcodeVerificationStep extends Fragment implements WizardStep {
 
                 }
 
-                private boolean updateAccountInformation(EnvelopedData envelopedData) {
+                private boolean updateAccountInformation(EnvelopedData envelopedData,boolean isUrl) {
 
                     boolean result = false;
 
                     try
                     {
-                        //Decrypt the seed value
-                        byte[] symmetricKey = envelopedData.getKey().getBytes("UTF-8");
-                        byte[] decodedKey = Base64.decode(symmetricKey,Base64.DEFAULT);
                         SystemConfiguration configuration = new SystemConfiguration();
                         configuration.setSymmetricAlgorithm(SYMMETRIC_ALGORITHM_NAME);
                         configuration.setPublicKeyName(PUBLIC_KEY_NAME);
@@ -266,19 +294,34 @@ public class BarcodeVerificationStep extends Fragment implements WizardStep {
                         configuration.setEncdecryptMode(ENCRYPTION_DECRYPTION_MODE);
                         configuration.setContext(((WizardFragment) BarcodeVerificationStep.this.parentFragment).getContext());
 
-                        sa.com.nadec.milk.security.SecurityManager securityManager = new SecurityManagerImpl(configuration);
+                        if (isUrl){
 
-                        byte[] SeedBytes = envelopedData.getSeed().getBytes("UTF-8");
-                        byte[] decodedSeedBytes = Base64.decode(SeedBytes, Base64.DEFAULT);
+                            //Decrypt the seed value
+                            byte[] symmetricKey = envelopedData.getKey().getBytes("UTF-8");
+                            byte[] decodedKey = Base64.decode(symmetricKey,Base64.DEFAULT);
 
-                        byte[] decryptedSeedValue = securityManager.decryptEnvelope(decodedSeedBytes,decodedKey);
 
-                        WizardFragment.envelopedData.setSeed(new String(decryptedSeedValue, "UTF-8"));
-                        WizardFragment.envelopedData.setNumDigits(envelopedData.getNumDigits());
-                        WizardFragment.envelopedData.setSeconds(envelopedData.getSeconds());
-                        WizardFragment.envelopedData.setKey(envelopedData.getKey());
-                        WizardFragment.envelopedData.setAccountName(envelopedData.getAccountName());
+                            sa.com.nadec.milk.security.SecurityManager securityManager = new SecurityManagerImpl(configuration);
 
+                            byte[] SeedBytes = envelopedData.getSeed().getBytes("UTF-8");
+                            byte[] decodedSeedBytes = Base64.decode(SeedBytes, Base64.DEFAULT);
+
+                            byte[] decryptedSeedValue = securityManager.decryptEnvelope(decodedSeedBytes,decodedKey);
+
+                            WizardFragment.envelopedData.setSeed(new String(decryptedSeedValue, "UTF-8"));
+                            WizardFragment.envelopedData.setNumDigits(envelopedData.getNumDigits());
+                            WizardFragment.envelopedData.setSeconds(envelopedData.getSeconds());
+                            WizardFragment.envelopedData.setKey(envelopedData.getKey());
+                            WizardFragment.envelopedData.setAccountName(envelopedData.getAccountName());
+
+                        }else
+                        {
+                            WizardFragment.envelopedData.setAccountName(envelopedData.getAccountName());
+                            WizardFragment.envelopedData.setSeed(envelopedData.getSeed());
+                            WizardFragment.envelopedData.setSeconds(envelopedData.getSeconds());
+                            WizardFragment.envelopedData.setNumDigits(envelopedData.getNumDigits());
+
+                        }
                         //Save it to the database
                         DatabaseManager manager = new DatabaseManager(configuration.getContext());
 
